@@ -26,7 +26,10 @@ class EmptyState extends StatelessWidget {
           Text(message, textAlign: TextAlign.center),
           if (buttonLabel != null && onPressed != null) ...[
             const SizedBox(height: 12),
-            OutlinedButton(onPressed: onPressed, child: Text(buttonLabel ?? '')),
+            OutlinedButton(
+              onPressed: onPressed,
+              child: Text(buttonLabel ?? ''),
+            ),
           ],
         ],
       ),

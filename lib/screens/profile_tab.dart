@@ -77,7 +77,10 @@ class _ProfileTabState extends State<ProfileTab> {
     final memberships = widget.events.fold<int>(
       0,
       (total, event) =>
-          total + (widget.profile.name.isNotEmpty && event.contains(widget.profile.name) ? 1 : 0),
+          total +
+          (widget.profile.name.isNotEmpty && event.contains(widget.profile.name)
+              ? 1
+              : 0),
     );
 
     return ListView(
@@ -91,7 +94,10 @@ class _ProfileTabState extends State<ProfileTab> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Center(
-                  child: CircleAvatar(radius: 36, child: Icon(Icons.person_outline, size: 36)),
+                  child: CircleAvatar(
+                    radius: 36,
+                    child: Icon(Icons.person_outline, size: 36),
+                  ),
                 ),
                 const SizedBox(height: 16),
                 Text(
@@ -109,7 +115,10 @@ class _ProfileTabState extends State<ProfileTab> {
                   key: _nameKey,
                   controller: _name,
                   focusNode: _nameFocus,
-                  decoration: const InputDecoration(labelText: 'Your name', border: OutlineInputBorder()),
+                  decoration: const InputDecoration(
+                    labelText: 'Your name',
+                    border: OutlineInputBorder(),
+                  ),
                   keyboardType: TextInputType.name,
                   textCapitalization: TextCapitalization.words,
                   textInputAction: TextInputAction.next,
@@ -123,7 +132,11 @@ class _ProfileTabState extends State<ProfileTab> {
                   key: _groupKey,
                   controller: _group,
                   focusNode: _groupFocus,
-                  decoration: const InputDecoration(labelText: 'Group', helperText: 'For example CS-101', border: OutlineInputBorder()),
+                  decoration: const InputDecoration(
+                    labelText: 'Group',
+                    helperText: 'For example CS-101',
+                    border: OutlineInputBorder(),
+                  ),
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -153,7 +166,9 @@ class _ProfileTabState extends State<ProfileTab> {
                 const SizedBox(height: 28),
                 Text(
                   'Everything stays in memory. Restarting the app restores the example events and clears the profile.',
-                  style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
                 ),
               ],
             ),

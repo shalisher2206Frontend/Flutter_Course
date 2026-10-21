@@ -59,10 +59,9 @@ class _AppShellState extends State<AppShell> {
   }
 
   Future<void> _addEvent() async {
-    final saved = await Navigator.of(context).pushNamed<Event>(
-      Routes.form,
-      arguments: const FormArguments(),
-    );
+    final saved = await Navigator.of(
+      context,
+    ).pushNamed<Event>(Routes.form, arguments: const FormArguments());
     if (!mounted || saved == null) return;
     setState(() => _events = [..._events, saved]);
   }

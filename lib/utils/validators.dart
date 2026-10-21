@@ -9,8 +9,12 @@ class Validators {
 
   static String? location(String? value, {required bool online}) {
     final text = (value ?? '').trim();
-    if (text.isEmpty) return online ? 'Enter a meeting link.' : 'Enter a location.';
-    if (online && !text.contains('://')) return 'Include a scheme such as https://.';
+    if (text.isEmpty) {
+      return online ? 'Enter a meeting link.' : 'Enter a location.';
+    }
+    if (online && !text.contains('://')) {
+      return 'Include a scheme such as https://.';
+    }
     return null;
   }
 

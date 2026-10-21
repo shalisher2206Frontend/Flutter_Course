@@ -82,12 +82,23 @@ class _EventFormState extends State<EventForm> {
 
   @override
   void dispose() {
-    for (final controller in [_title, _location, _limit, _description, _date, _time]) {
+    for (final controller in [
+      _title,
+      _location,
+      _limit,
+      _description,
+      _date,
+      _time,
+    ]) {
       controller.dispose();
     }
     for (final node in [
-      _titleFocus, _locationFocus, _limitFocus,
-      _dateFocus, _timeFocus, _descriptionFocus,
+      _titleFocus,
+      _locationFocus,
+      _limitFocus,
+      _dateFocus,
+      _timeFocus,
+      _descriptionFocus,
     ]) {
       node.dispose();
     }
@@ -104,7 +115,13 @@ class _EventFormState extends State<EventForm> {
     );
     if (!mounted || picked == null) return;
     setState(() {
-      _when = DateTime(picked.year, picked.month, picked.day, _when.hour, _when.minute);
+      _when = DateTime(
+        picked.year,
+        picked.month,
+        picked.day,
+        _when.hour,
+        _when.minute,
+      );
       _updatePickerText();
     });
     _timeFocus.requestFocus();
@@ -117,7 +134,13 @@ class _EventFormState extends State<EventForm> {
     );
     if (!mounted || picked == null) return;
     setState(() {
-      _when = DateTime(_when.year, _when.month, _when.day, picked.hour, picked.minute);
+      _when = DateTime(
+        _when.year,
+        _when.month,
+        _when.day,
+        picked.hour,
+        picked.minute,
+      );
       _updatePickerText();
     });
     _descriptionFocus.requestFocus();
@@ -174,7 +197,9 @@ class _EventFormState extends State<EventForm> {
     canPop: !_dirty,
     onPopInvokedWithResult: _onPop,
     child: Scaffold(
-      appBar: AppBar(title: Text(widget.event == null ? 'New event' : 'Edit event')),
+      appBar: AppBar(
+        title: Text(widget.event == null ? 'New event' : 'Edit event'),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
@@ -194,7 +219,10 @@ class _EventFormState extends State<EventForm> {
                       controller: _title,
                       focusNode: _titleFocus,
                       enabled: !_saving,
-                      decoration: const InputDecoration(labelText: 'Title', border: OutlineInputBorder()),
+                      decoration: const InputDecoration(
+                        labelText: 'Title',
+                        border: OutlineInputBorder(),
+                      ),
                       maxLength: 60,
                       keyboardType: TextInputType.text,
                       textCapitalization: TextCapitalization.sentences,
@@ -206,43 +234,69 @@ class _EventFormState extends State<EventForm> {
                     const SizedBox(height: 16),
                     DropdownButtonFormField<EventCategory>(
                       initialValue: _category,
-                      decoration: const InputDecoration(labelText: 'Category', border: OutlineInputBorder()),
-                      items: EventCategory.values.map((category) =>
-                        DropdownMenuItem(value: category, child: Text(category.label)),
-                      ).toList(),
-                      onChanged: _saving ? null : (value) => setState(() => _category = value),
-                      validator: (value) => value == null ? 'Choose a category.' : null,
+                      decoration: const InputDecoration(
+                        labelText: 'Category',
+                        border: OutlineInputBorder(),
+                      ),
+                      items: EventCategory.values
+                          .map(
+                            (category) => DropdownMenuItem(
+                              value: category,
+                              child: Text(category.label),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: _saving
+                          ? null
+                          : (value) => setState(() => _category = value),
+                      validator: (value) =>
+                          value == null ? 'Choose a category.' : null,
                     ),
                     SwitchListTile(
                       contentPadding: EdgeInsets.zero,
                       title: const Text('Online event'),
-                      subtitle: const Text('Use a meeting link instead of a room.'),
+                      subtitle: const Text(
+                        'Use a meeting link instead of a room.',
+                      ),
                       value: _online,
-                      onChanged: _saving ? null : (value) => setState(() => _online = value),
+                      onChanged: _saving
+                          ? null
+                          : (value) => setState(() => _online = value),
                     ),
                     const SizedBox(height: 8),
                     TextFormField(
                       controller: _location,
                       focusNode: _locationFocus,
                       enabled: !_saving,
-                      decoration: InputDecoration(labelText: _online ? 'Meeting link' : 'Location', border: const OutlineInputBorder()),
-                      keyboardType: _online ? TextInputType.url : TextInputType.streetAddress,
+                      decoration: InputDecoration(
+                        labelText: _online ? 'Meeting link' : 'Location',
+                        border: const OutlineInputBorder(),
+                      ),
+                      keyboardType: _online
+                          ? TextInputType.url
+                          : TextInputType.streetAddress,
                       textInputAction: TextInputAction.next,
                       onFieldSubmitted: (_) => _limitFocus.requestFocus(),
                       onTapOutside: _dismissKeyboard,
-                      validator: (value) => Validators.location(value, online: _online),
+                      validator: (value) =>
+                          Validators.location(value, online: _online),
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _limit,
                       focusNode: _limitFocus,
                       enabled: !_saving,
-                      decoration: const InputDecoration(labelText: 'Maximum people', helperText: '1 to 500', border: OutlineInputBorder()),
+                      decoration: const InputDecoration(
+                        labelText: 'Maximum people',
+                        helperText: '1 to 500',
+                        border: OutlineInputBorder(),
+                      ),
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
                       onFieldSubmitted: (_) => _dateFocus.requestFocus(),
                       onTapOutside: _dismissKeyboard,
-                      validator: (value) => Validators.limit(value, taken: _original.count),
+                      validator: (value) =>
+                          Validators.limit(value, taken: _original.count),
                     ),
                     const SizedBox(height: 16),
                     Row(
@@ -254,13 +308,21 @@ class _EventFormState extends State<EventForm> {
                             focusNode: _dateFocus,
                             enabled: !_saving,
                             readOnly: true,
-                            decoration: const InputDecoration(labelText: 'Date', suffixIcon: Icon(Icons.calendar_today_outlined), border: OutlineInputBorder()),
+                            decoration: const InputDecoration(
+                              labelText: 'Date',
+                              suffixIcon: Icon(Icons.calendar_today_outlined),
+                              border: OutlineInputBorder(),
+                            ),
                             keyboardType: TextInputType.datetime,
                             textInputAction: TextInputAction.next,
                             onFieldSubmitted: (_) => _timeFocus.requestFocus(),
                             onTap: _pickDate,
                             onTapOutside: _dismissKeyboard,
-                            validator: (value) => Validators.date(value, when: _when, isNew: widget.event == null),
+                            validator: (value) => Validators.date(
+                              value,
+                              when: _when,
+                              isNew: widget.event == null,
+                            ),
                           ),
                         ),
                         const SizedBox(width: 12),
@@ -270,10 +332,15 @@ class _EventFormState extends State<EventForm> {
                             focusNode: _timeFocus,
                             enabled: !_saving,
                             readOnly: true,
-                            decoration: const InputDecoration(labelText: 'Time', suffixIcon: Icon(Icons.access_time), border: OutlineInputBorder()),
+                            decoration: const InputDecoration(
+                              labelText: 'Time',
+                              suffixIcon: Icon(Icons.access_time),
+                              border: OutlineInputBorder(),
+                            ),
                             keyboardType: TextInputType.datetime,
                             textInputAction: TextInputAction.next,
-                            onFieldSubmitted: (_) => _descriptionFocus.requestFocus(),
+                            onFieldSubmitted: (_) =>
+                                _descriptionFocus.requestFocus(),
                             onTap: _pickTime,
                             onTapOutside: _dismissKeyboard,
                             validator: Validators.requiredText,
@@ -286,7 +353,10 @@ class _EventFormState extends State<EventForm> {
                       controller: _description,
                       focusNode: _descriptionFocus,
                       enabled: !_saving,
-                      decoration: const InputDecoration(labelText: 'Description (optional)', border: OutlineInputBorder()),
+                      decoration: const InputDecoration(
+                        labelText: 'Description (optional)',
+                        border: OutlineInputBorder(),
+                      ),
                       maxLines: 3,
                       keyboardType: TextInputType.multiline,
                       textInputAction: TextInputAction.done,
@@ -298,7 +368,11 @@ class _EventFormState extends State<EventForm> {
                     FilledButton.icon(
                       onPressed: _saving ? null : _save,
                       icon: _saving
-                          ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
+                          ? const SizedBox(
+                              width: 18,
+                              height: 18,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            )
                           : const Icon(Icons.check),
                       label: Text(_saving ? 'Saving...' : 'Save event'),
                     ),

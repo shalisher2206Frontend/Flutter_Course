@@ -45,10 +45,9 @@ class _EventDetailState extends State<EventDetail> {
   }
 
   Future<void> _edit() async {
-    final edited = await Navigator.of(context).pushNamed<Event>(
-      Routes.form,
-      arguments: FormArguments(event: _event),
-    );
+    final edited = await Navigator.of(
+      context,
+    ).pushNamed<Event>(Routes.form, arguments: FormArguments(event: _event));
     if (!mounted || edited == null) return;
     _update(edited);
   }
@@ -200,7 +199,10 @@ class _EventDetailState extends State<EventDetail> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(_event.title, style: theme.textTheme.headlineSmall),
+                            Text(
+                              _event.title,
+                              style: theme.textTheme.headlineSmall,
+                            ),
                             const SizedBox(height: 20),
                             _InfoRow(
                               icon: Icons.schedule,
@@ -224,7 +226,9 @@ class _EventDetailState extends State<EventDetail> {
                             ],
                             if (_event.isPast) ...[
                               const SizedBox(height: 20),
-                              const Text('This event has already started. Registration is closed.'),
+                              const Text(
+                                'This event has already started. Registration is closed.',
+                              ),
                             ],
                           ],
                         ),
@@ -242,12 +246,14 @@ class _EventDetailState extends State<EventDetail> {
                             for (final person in _event.attendees)
                               ListTile(
                                 title: Text(person),
-                                selected: person.toLowerCase() == name.toLowerCase(),
+                                selected:
+                                    person.toLowerCase() == name.toLowerCase(),
                                 selectedTileColor: scheme.primaryContainer,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                trailing: person.toLowerCase() == name.toLowerCase()
+                                trailing:
+                                    person.toLowerCase() == name.toLowerCase()
                                     ? const Chip(label: Text('You'))
                                     : null,
                               ),
@@ -262,7 +268,9 @@ class _EventDetailState extends State<EventDetail> {
           minimum: const EdgeInsets.all(16),
           child: FilledButton.icon(
             onPressed: joined || canRegister ? _register : null,
-            icon: Icon(joined ? Icons.person_remove_outlined : Icons.person_add_outlined),
+            icon: Icon(
+              joined ? Icons.person_remove_outlined : Icons.person_add_outlined,
+            ),
             label: Text(
               joined
                   ? 'Cancel registration'

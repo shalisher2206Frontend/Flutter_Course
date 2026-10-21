@@ -5,8 +5,6 @@ class Profile {
   final String name;
   final String group;
 
-  Profile copyWith({String? name, String? group}) => Profile(
-    name: name ?? this.name,
-    group: group ?? this.group,
-  );
+  Profile copyWith({String? name, String? group}) =>
+      Profile(name: name ?? this.name, group: group ?? this.group);
 }

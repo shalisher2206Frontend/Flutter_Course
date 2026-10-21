@@ -146,7 +146,9 @@ class _EventListState extends State<EventList> {
                   )
                 : LayoutBuilder(
                     builder: (context, constraints) {
-                      if (constraints.maxWidth < 600) {
+                      // Account for the page's 16 px padding on both sides.
+                      final pageWidth = constraints.maxWidth + 32;
+                      if (pageWidth < 600) {
                         return ListView.separated(
                           padding: const EdgeInsets.only(bottom: 88),
                           itemCount: visible.length,
