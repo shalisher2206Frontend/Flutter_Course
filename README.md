@@ -51,6 +51,16 @@ The shell owns the event list and profile so every tab uses the same data. Tabs 
 
 ## Checks
 
+Verified during the build:
+
+- Flutter analyzer: no issues found.
+- Dart formatter: zero changes.
+- Release web build: successful.
+- Browser checks: registration and cancellation, live counts, profile validation, themes, search and filters, favourites, create/edit/delete, double-save prevention, clean and dirty back navigation, picker cancellation, online and numeric validation, drawer reset, and the 600-pixel grid breakpoint.
+- The app rendered with external network access blocked and made no external requests.
+
+Android project files are included; an Android device build and system back gesture have not been verified here.
+
 ```text
 flutter analyze
 dart format --output=none --set-exit-if-changed .
