@@ -94,13 +94,11 @@ class _AppShellState extends State<AppShell> {
             children: [
               const ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: CircleAvatar(child: Icon(Icons.school_outlined)),
                 title: Text('Campus Events'),
                 subtitle: Text('Find something worth joining'),
               ),
               const SizedBox(height: 24),
               ListTile(
-                leading: const Icon(Icons.info_outline),
                 title: const Text('About'),
                 onTap: () {
                   Navigator.of(context).pop();
@@ -123,7 +121,6 @@ class _AppShellState extends State<AppShell> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.restart_alt),
                 title: const Text('Reset data'),
                 onTap: () {
                   Navigator.of(context).pop();

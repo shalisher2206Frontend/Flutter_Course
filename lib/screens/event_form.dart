@@ -207,10 +207,9 @@ class _EventFormState extends State<EventForm> {
                     DropdownButtonFormField<EventCategory>(
                       initialValue: _category,
                       decoration: const InputDecoration(labelText: 'Category', border: OutlineInputBorder()),
-                      items: [
-                        for (final category in EventCategory.values)
-                          DropdownMenuItem(value: category, child: Text(category.label)),
-                      ],
+                      items: EventCategory.values.map((category) =>
+                        DropdownMenuItem(value: category, child: Text(category.label)),
+                      ).toList(),
                       onChanged: _saving ? null : (value) => setState(() => _category = value),
                       validator: (value) => value == null ? 'Choose a category.' : null,
                     ),
