@@ -26,6 +26,7 @@ class _AppShellState extends State<AppShell> {
   List<Event> _events = seedEvents();
   Profile _profile = const Profile.empty();
   int _tab = 0;
+  int _resetCount = 0;
 
   void _replaceEvent(Event updated) {
     setState(() {
@@ -77,6 +78,7 @@ class _AppShellState extends State<AppShell> {
     setState(() {
       _events = seedEvents();
       _profile = const Profile.empty();
+      _resetCount += 1;
     });
   }
 
@@ -149,6 +151,7 @@ class _AppShellState extends State<AppShell> {
             onBrowse: () => _switchTab(0),
           ),
           ProfileTab(
+            key: ValueKey(_resetCount),
             profile: _profile,
             events: _events,
             themeMode: widget.themeMode,
