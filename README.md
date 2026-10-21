@@ -4,6 +4,8 @@ A beginner-friendly Flutter Lab 1 app. Browse campus events, register with your 
 
 ## Run the app
 
+On Windows with Flutter installed, extract the download and double-click `RUN_APP.bat` inside `campus_events`.
+
 Open this folder in VS Code or Android Studio. In its terminal run:
 
 ```text

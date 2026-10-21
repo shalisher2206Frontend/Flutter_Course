@@ -10,7 +10,7 @@ List<Event> seedEvents() {
     // Exactly 60 characters: check the two-line card title on a small phone.
     Event(
       id: 'flutter',
-      title: 'Build your first Flutter app with friends at our campus club!',
+      title: 'Build your first Flutter app with friends at our campus club',
       category: EventCategory.tech,
       when: at(1, 16),
       location: 'Innovation Lab',
